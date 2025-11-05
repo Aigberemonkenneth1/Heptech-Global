@@ -1,0 +1,858 @@
+/* General Body Styles */
+body, html {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* White background for the rest of the site */
+    color: #333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hero Section Container */
+.hero {
+    position: relative;
+    height: 100vh; /* Full screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden; /* Hides any part of the video that goes outside the container */
+}
+
+/* Background Video Styling */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the area without distortion */
+    transform: translate(-50%, -50%);
+        z-index: 0;
+        pointer-events: none;
+        /* Force-hide default video controls */
+ /* Video at the back, but visible */
+}
+.hero-video::-webkit-media-controls {
+    display: none !important;
+}
+
+/* Overlay to darken the video slightly for text readability */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+        z-index: 1; /* Overlay above video */
+}
+
+/* Hero Content Styling */
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+        position: relative;
+        z-index: 2; /* Content above overlay and video */
+}
+
+.hero-content h1 {
+    font-size: 3.5em; /* Large, bold headline */
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* The Orange Call-to-Action Button */
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #FF6600; /* A vibrant orange */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #E65C00; /* A slightly darker orange on hover */
+}
+
+/*-----------------------------*/
+/* Services Section - Carousel */
+/*-----------------------------*/
+
+/* Replace your entire .services rule with this one */
+.services {
+    padding: 80px 0;
+    text-align: center;
+    overflow-x: hidden;
+    
+    /* The Pattern */
+    background-color: #ffffff; /* Fallback color */
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0);
+    background-size: 20px 20px;
+}
+
+.services h2 {
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Fixed height for the carousel area */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-card {
+    background-color: #f9f9f9;
+    padding: 40px 30px;
+    border-radius: 10px;
+    border-top: 4px solid #FF6600; /* Orange accent */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 320px; /* Fixed width for consistency */
+    cursor: pointer;
+    
+    /* Animation properties */
+    position: absolute;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, z-index 0.5s;
+}
+
+/* Card States */
+.service-card.active {
+    transform: translateX(0) scale(1.05); /* Centered and slightly larger */
+    opacity: 1;
+    z-index: 3; /* Brings the active card to the front */
+}
+
+.service-card.next {
+    transform: translateX(200px) scale(0.9); /* To the right and smaller */
+    opacity: 0.6;
+    z-index: 2;
+}
+
+.service-card.prev {
+    transform: translateX(-200px) scale(0.9); /* To the left and smaller */
+    opacity: 0.6;
+    z-index: 2;
+}
+
+.service-card .service-icon img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+/*-----------------------------*/
+/* Portfolio Section (Modern)  */
+/*-----------------------------*/
+
+.portfolio {
+    padding: 80px 20px;
+    background-color: #121212; /* Sleek dark background */
+    overflow: hidden; /* Important for scroll animations */
+}
+
+.portfolio-container h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    color: #ffffff; /* White text on dark background */
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.portfolio-item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    
+    /* Reveal-on-scroll initial state */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* The state after the item scrolls into view */
+.portfolio-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.portfolio-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-out;
+}
+
+/* The hover overlay */
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, rgba(255, 102, 0, 0.95), rgba(255, 102, 0, 0.7)); /* Orange gradient */
+    color: white;
+    display: flex;
+    align-items: flex-end; /* Align text to the bottom */
+    padding: 30px;
+    box-sizing: border-box; /* Ensures padding is included in the height */
+    
+    /* Hide it by default */
+    opacity: 0;
+    transition: all 0.4s ease-out;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+/* A subtle zoom effect on the image on hover */
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+/* The text inside the overlay */
+.portfolio-overlay-text {
+    /* New animation for the text */
+    transform: translateY(20px);
+    transition: transform 0.4s ease-out;
+}
+
+.portfolio-item:hover .portfolio-overlay-text {
+    transform: translateY(0);
+}
+
+.portfolio-overlay-text h3 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.portfolio-overlay-text p {
+    margin: 7px 0 0;
+    font-size: 1em;
+}
+
+/*--------------------*/
+/* About Section      */
+/*--------------------*/
+
+.about {
+    padding: 80px 20px;
+    background-color: #f8f9fa; /* Light gray to contrast with the dark portfolio */
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Creates a 1/3 to 2/3 column ratio */
+    align-items: center;
+    gap: 50px;
+}
+
+/*----------------------------------*/
+/* About Section - Animated Image */
+/*----------------------------------*/
+
+/* The animation for the rotation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*----------------------------------*/
+/* About Section - Animated Image (Corrected) */
+/*----------------------------------*/
+
+/* The animation for the rotation (no changes here) */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* The container - this is now a static positioning frame */
+.about-image {
+    position: relative;
+    width: 316px; /* The total size including the border */
+    height: 316px;
+    border-radius: 50%;
+}
+
+/* The spinning element - sits BEHIND the image */
+.about-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    
+    /* The gradient that forms both the moving and static parts of the border */
+    background: conic-gradient(#FF6600 50%, #e9ecef 0); /* Orange "progress" on a gray track */
+    
+    /* Applying the animation */
+    animation: spin 3s linear infinite;
+}
+
+/* The image itself - sits on top and does NOT rotate */
+.about-image img {
+    /* Perfect centering inside the container */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 300px; /* Slightly smaller than the container to reveal the border */
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #f8f9fa; /* A small border to blend with the section background */
+}
+
+/* Adjustments for responsive layout (no changes here) */
+@media (max-width: 768px) {
+    .about-container {
+        justify-items: center;
+    }
+    .about-image {
+        margin-bottom: 30px;
+    }
+}
+
+.about-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.about-text h3 {
+    font-size: 1.5em;
+    color: #FF6600; /* Orange accent color */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.about-text p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+    .about-container {
+        grid-template-columns: 1fr; /* Stacks columns on top of each other */
+        text-align: center;
+    }
+
+    .about-image {
+        margin-bottom: 30px;
+    }
+}
+/*--------------------*/
+/* Contact Section    */
+/*--------------------*/
+
+.contact {
+    padding: 80px 20px;
+    background-color: #ffffff;
+}
+
+.contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.contact-info h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-info p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.info-item span {
+    font-weight: bold;
+    color: #333;
+}
+
+.info-item a {
+    color: #FF6600; /* Orange brand color */
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+}
+
+.info-item a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styling */
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Important for padding */
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #FF6600; /* Orange focus color */
+    box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+}
+
+.contact-form .cta-button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr; /* Stack columns */
+    }
+}
+
+/*--------------------*/
+/* Navigation & Footer*/
+/*--------------------*/
+
+/* Navigation Bar */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid #eee;
+    padding: 15px 20px;
+    position: fixed; /* Sticks to the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Stays on top of all other content */
+    box-sizing: border-box;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.8em;
+    font-weight: 300;
+    color: #FF6600; /* Orange brand color */
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Underline effect on hover */
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #FF6600;
+    transition: width 0.3s ease-out;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #121212; /* Matches the dark portfolio section */
+    color: #aaa;
+}
+
+/* We need to add padding to the top of the body to prevent the
+   fixed navbar from covering the top of our hero section */
+body {
+    padding-top: 70px; /* Adjust this value if your navbar height changes */
+}
+
+/*--------------------*/
+/* Navigation Dropdown*/
+/*--------------------*/
+
+/* Container for the dropdown */
+.dropdown {
+    position: relative;
+}
+
+/* The down-arrow icon */
+.caret {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+/* The dropdown menu itself */
+.dropdown-menu {
+    position: absolute;
+    top: 150%; /* Position it below the nav link */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    width: 200px; /* Width of the dropdown */
+    z-index: 1001;
+
+    /* Hide it by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, top 0.3s ease;
+}
+
+/* The class that JavaScript will toggle */
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    top: 120%; /* Animate it upwards into view */
+}
+
+/* Styling for the links inside the dropdown */
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 1em; /* Slightly smaller font */
+    font-weight: normal;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f8f9fa;
+    color: #FF6600; /* Orange on hover */
+}
+
+/*--------------------*/
+/* Back to Top Button */
+/*--------------------*/
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff; /* Orange */
+    border-radius: 0px;
+    z-index: 500;
+    
+    /* New styles for the icon */
+    padding: 8px; /* Give it some padding */
+    display: flex; /* Helps center the icon */
+    justify-content: center;
+    align-items: center;
+
+    /* Hide by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+}
+
+.back-to-top:hover {
+    background-color: #E65C00; /* Darker orange on hover */
+}
+
+/* Show the button */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* This new rule styles the image INSIDE the button */
+.back-to-top img {
+    width: 24px;  /* Set your icon's size */
+    height: 24px;
+    display: block;
+}
+
+/*--------------------*/
+/* Responsive Nav     */
+/*--------------------*/
+
+/* Hamburger Icon Styling */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    
+    .hamburger {
+        display: block; /* Show hamburger on mobile */
+    }
+
+    /* Animate hamburger to an 'X' when active */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Hide the desktop menu */
+    .nav-menu {
+        position: fixed;
+        left: -100%; /* Start off-screen */
+        top: 70px; /* Position below the navbar */
+        width: 100%;
+        height: 100vh;
+        background-color: white;
+        flex-direction: column; /* Stack links vertically */
+        align-items: center;
+        gap: 0;
+        padding-top: 20px;
+        transition: left 0.3s ease-in-out;
+    }
+
+    /* This class is toggled by JS to show the menu */
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu a {
+        font-size: 1.5em; /* Make links bigger for mobile */
+        padding: 15px 0;
+        display: block; /* Make the whole area clickable */
+        width: 100%;
+    }
+    
+    .nav-menu a:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .nav-menu a::after {
+        display: none; /* Remove desktop hover underline */
+    }
+
+    /* Mobile Dropdown Styling */
+    .dropdown-menu {
+        position: static; /* Remove absolute positioning */
+        transform: none;
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: #f9f9f9; /* Light bg for dropdown */
+        
+        /* Hide mobile dropdown by default */
+        display: none; 
+        opacity: 1;
+        visibility: visible;
+        transition: none;
+    }
+    
+    /* Show mobile dropdown when 'show' class is added */
+    .dropdown-menu.show {
+        display: block;
+    }
+    
+    .dropdown-menu li a {
+        font-size: 1.2em; /* Slightly smaller than main links */
+        padding: 12px 0;
+    }
+
+    .cta-button {
+        margin-bottom: 36px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em; /* Adjust headline size for mobile */
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+}
+
+/*--------------------*/
+/* Responsive Carousel*/
+/*--------------------*/
+
+@media (max-width: 768px) {
+    .carousel-container {
+        height: auto; /* Let the container grow as needed */
+        flex-direction: column; /* Stack the cards vertically */
+        gap: 20px; /* Add space between the stacked cards */
+    }
+
+    /* This rule overrides all the carousel-specific styles */
+    .service-card,
+    .service-card.active,
+    .service-card.prev,
+    .service-card.next {
+        position: static; /* Remove absolute positioning */
+        transform: none;  /* Remove all scaling and movement */
+        opacity: 1;       /* Make all cards fully visible */
+        width: 90%;       /* Make cards wide but not full-screen */
+        max-width: 320px; /* Match the original width */
+        cursor: default;  /* Remove the pointer cursor */
+    }
+
+    /* We also hide the JS-powered dropdown on mobile (since it's not a carousel)
+       and just rely on the main mobile nav dropdown */
+    .service-card .dropdown-menu {
+        display: none !important;
+    }
+}
+
+/*--------------------*/
+/* Preloader          */
+/*--------------------*/
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff; /* White background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+/* This class will be added by JS to fade out */
+.preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* The spinning animation */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #e9ecef; /* Light gray track */
+    border-top-color: #FF6600; /* Orange spinner */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+/* Keyframes for the spinner are already defined for your 'about' image */
+
+/*--------------------*/
+/* Contact Form Feedback*/
+/*--------------------*/
+
+/* Hide the message by default */
+.form-success-message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #d4edda; /* Greenish background */
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* This class will be added by JS */
+.form-success-message.show {
+    display: block;
+}
