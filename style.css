@@ -856,3 +856,24 @@ body {
 .form-success-message.show {
     display: block;
 }
+
+/*--------------------*/
+/* Scroll Animations  */
+/*--------------------*/
+
+/* Initial "hidden" state for elements we want to fade in */
+.about-image,
+.about-text,
+.service-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* The "visible" state that JS will add */
+.about-image.is-visible,
+.about-text.is-visible,
+.service-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
