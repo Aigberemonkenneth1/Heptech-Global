@@ -410,6 +410,44 @@
     <img class="lightbox-content" id="lightbox-img">
     <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
+            <script>
+    // --- Lightbox Logic ---
+    const lightbox = document.getElementById('portfolio-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop the link from navigating
+            
+            // Get data from the clicked item
+            const imgSrc = item.getAttribute('href');
+            const captionText = item.getAttribute('data-caption');
+            
+            // Set data in the lightbox
+            lightboxImg.src = imgSrc;
+            lightboxCaption.textContent = captionText;
+            
+            // Show the lightbox
+            lightbox.style.display = 'block';
+        });
+    });
+
+    // Close the lightbox
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+    }
+    
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        // Close if user clicks on the dark background (but not the image)
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+</script>
 <script src="app.js"></script>
 
 </body>
